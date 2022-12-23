@@ -1,0 +1,23 @@
+body {
+	margin-left: 10px;
+	font-family: BankGothic;
+}
+/* label, input, {
+	margin: 30px;
+} */
+table,th {
+	border:1px solid black;
+	text-allign: left;
+}
+.topBar {
+	background: lightgray;
+}
+.botBar {
+	background: white;
+}
+table {
+	background-color: black;
+}
+text {
+	margin: 20px;
+}
