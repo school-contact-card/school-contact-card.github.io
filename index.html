@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Online contact card generator</title>
+</head>
+<style>
+	body {
+		margin: 10px;
+	}
+	label, input, {
+		margin: 30px;
+	}
+</style>
+<body>
+	<h1><a href="index.html"> Contact card generator</a></h1>
+	<hr>
+	<div>
+		<form action="view.html">
+  			<label for="name">Name:</label>
+  			<input type="text" id="name" name="name"><br><br>
+  			
+  			<label for="lname">Phone Number: </label>
+  			<input type="text" id="pnum" name="pnum"><br><br>
+  			
+  			<label for="email">Email address: </label>
+  			<input type="email" id="email" name="email"><br><br>
+  			
+  			<label for="notes">Additional notes: </label>
+			<textarea id="notes" name="notes" rows="4" cols="50"></textarea>
+  			<!-- <input type="text" id="notes" name="notes"><br><br> -->
+			<!-- Old code, didn't support multi-line input for notes-->
+  		<p> Leave any unneeded fields blank.</p>
+  		<input type="submit" value="Create">
+		</form>
+	</div>
+</body>
+</html>
