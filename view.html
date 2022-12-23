@@ -1,0 +1,97 @@
+<!DOCTYPE html><html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Online contact card generator</title>
+	<script src="FileSaver.js"></script>
+</head>
+<noscript>
+	<style>
+		.showContact {
+			display: none;
+		}
+	</style>
+</noscript>
+<body>
+	<h1><a href="index.html"> Contact card generator</a></h1>
+	<hr>
+	<table>
+		<tr class="topBar">
+			<th>Name </th>
+			<th>Phone Number</th>
+			<th>Email</th>
+			<th>Notes</th>
+		</tr>
+		<tr class="botBar">
+			<th style="padding: 5px;" id="name"></th>
+			<th style="padding: 5px;" id="pnum"></th>
+			<th style="padding: 5px;" id="email"</th>
+			<th style="padding: 5px;" id="notes"></th>
+		</tr>
+	</table>
+	<br>		
+
+		<noscript>
+			<p>Javascript disabled? No problem, simply read the contact information
+			from the URL bar
+			<br>
+			For example:
+			<br>
+			(websiteurl)/view.html?name=<strong>John+Doe</strong>&amp;pnum=<strong>555-555-5555</strong>&amp;email=<strong>john.doe%40example.com</strong>&amp;notes=<strong>Look+forward+to+talking+with+you!</strong>
+			<br><br>
+			Apologies for the inconvenience.
+		</noscript>
+	<!-- Scripts to process information -->
+	<script>
+		function download() {
+  			const link = document.createElement('a')
+  			const url = URL.createObjectURL(file)
+			
+  			link.href = url
+  			link.download = file.name
+  			document.body.appendChild(link)
+  			link.click()
+  			document.body.removeChild(link)
+  			window.URL.revokeObjectURL(url)
+		}
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		var name = urlParams.get('name');
+		var pnum = urlParams.get('pnum');
+		var email = urlParams.get('email');
+		var notes = urlParams.get('notes');
+		// testing code, remove later
+		name = name.replace(/[\n\r]/g, '');
+		pnum = pnum.replace(/[\n\r]/g, '');
+		email = email.replace(/[\n\r]/g, '');
+		if (name != ""){
+			document.getElementById("name").innerText = "" + name;
+		}
+		if (pnum != "") {
+			document.getElementById("pnum").innerText = "" + pnum;
+		}
+		if (email != "") {
+			document.getElementById("email").innerText = "" + email;
+		}
+		if ( notes != "") {
+			document.getElementById("notes").innerText = "" + notes;
+		}
+		// Function to create vCard
+		function vCardDownload() {
+			console.log("Nothing for now");
+			var vCardData="BEGIN:VCARD\nVERSION:4.0\nFN:" + name + "\nEMAIL;TYPE=work:" + email + "\nNOTE:Hello\n" + "TEL:" + pnum + "\nEND:VCARD";
+			var blob = new Blob([vCardData], {
+				type: "charset=utf-8",
+			});
+			saveAs(blob, "contact.vcf");
+		}
+	</script>
+	<script src="jquery.min.js"></script>
+	<script src="qrcode.min.js"></script>
+	<div id="qrcode"></div>
+	<script>
+		new QRCode(document.getElementById("qrcode"), window.location.href);
+	</script>
+	<br><br><br><button onclick="vCardDownload();">Import Contact</button>
+</body>
+</html>
